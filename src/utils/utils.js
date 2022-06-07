@@ -1,3 +1,5 @@
+import { homedir } from 'os';
+
 const getUserName = (args) => {
     const userName = args.slice(2).reduce(
         (acc, key) => {
@@ -13,4 +15,8 @@ const getUserName = (args) => {
     return userName.data;
 }
 
-export { getUserName };
+const getHomeDir = () => {
+    return homedir();
+}
+
+export { getUserName, getHomeDir };
