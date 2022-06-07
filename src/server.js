@@ -2,7 +2,7 @@ import * as readline from 'node:readline';
 import { stdin as input, stdout as output } from 'process';
 import { getUserName } from './utils/utils';
 
-const reader = async () => {
+const reader = () => {
     const userName = getUserName(process.argv);
     const greeting = `Welcome to the File Manager, ${userName}!`;
     const goodBye = `Thank you for using File Manager, ${userName}!`
