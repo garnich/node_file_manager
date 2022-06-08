@@ -1,28 +1,33 @@
 import * as readline from 'node:readline';
-import { stdin, stdout } from 'process';
-import { getUserName, getHomeDir } from './utils/utils';
+import { stdin, stdout, cwd, chdir } from 'process';
+import { getUserName, getCurrendDirMsg, getHomeDir } from './utils/commonUtils';
+import commandResolver from './utils/commandResolver';
 import { EOL } from 'os';
+
 
 const reader = () => {
     const userName = getUserName(process.argv);
-    const homeDir = getHomeDir();
     const greeting = `Welcome to the File Manager, ${userName}! ${EOL}`;
-    const goodBye = `Thank you for using File Manager, ${userName}!`
+    const goodBye = `${EOL}Thank you for using File Manager, ${userName}!`;
+
     
     const rl = readline.createInterface({ input: stdin, output: stdout });
 
     stdout.write(greeting);
     stdout.write(EOL);
-    stdout.write(`${homeDir} ${EOL}`);
+    chdir(getHomeDir());
+
+    stdout.write(getCurrendDirMsg(cwd()));
 
     rl.on('line', (input) => {
-        if(input.trim() === 'exit') {
+        if(input.trim() === '.exit') {
             stdout.write(goodBye);
 
             process.exit();
         }
 
-        stdout.write(`Received: ${input} ${EOL}`);
+        stdout.write(EOL);
+        commandResolver(input)
     });
 
     rl.on('exit', () => {
