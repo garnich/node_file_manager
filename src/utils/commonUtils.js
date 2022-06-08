@@ -1,4 +1,5 @@
 import { homedir, EOL } from 'os';
+import { stdout } from 'process';
 
 const getUserName = (args) => {
     const userName = args.slice(2).reduce(
@@ -33,4 +34,16 @@ const getPathToFile = (str) => {
     return null;
 };
 
-export { getUserName, getHomeDir, getCurrendDirMsg, getPathToFile };
+const getCpuInfo = (cpuArr) => {
+    stdout.write(`AMOUNT OF CPUS: ${cpuArr.length}${EOL}`);
+    stdout.write(`${EOL}`);
+
+
+    cpuArr.map((cpu) => {
+        stdout.write(`CPU MODEL: ${cpu.model}${EOL}`);
+        stdout.write(`CPU CLOCK RATE: ${cpu.speed / 1000} GHz${EOL}`);
+        stdout.write(`${EOL}`);
+    })
+}
+
+export { getUserName, getHomeDir, getCurrendDirMsg, getPathToFile, getCpuInfo };

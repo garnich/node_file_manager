@@ -1,6 +1,6 @@
-import { EOL } from 'os';
+import { EOL, cpus} from 'os';
 import { cwd, stdout } from 'process';
-import { getCurrendDirMsg } from '../../utils/commonUtils';
+import { getCurrendDirMsg, getCpuInfo } from '../../utils/commonUtils';
 
 const osHelper = (command) => {
     const commandArr = command.trim().split(' ');
@@ -14,6 +14,10 @@ const osHelper = (command) => {
         switch(flag) {
             case '--EOL':
                 stdout.write(`${JSON.stringify(EOL)}${EOL}`)
+                stdout.write(getCurrendDirMsg(cwd()));
+                break;
+            case '--CPUS':
+                getCpuInfo(cpus());
                 stdout.write(getCurrendDirMsg(cwd()));
                 break;
             default:
