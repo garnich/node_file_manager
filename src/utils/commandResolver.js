@@ -1,6 +1,6 @@
 import { lsHelper, upHelper, cdHelper } from '../helpers/navDirHelper/navDirHelper';
-import { catHelper, addHelper, rnHelper, cpHelper } from '../helpers/fileOperationsHelper/fileOperationsHelper';
-import { cdRegexp, upRegexp, lsRegexp, catRegexp, addRegexp, rnRegexp, cpRegexp } from '../constants';
+import { catHelper, addHelper, rnHelper, cpHelper, rmHelper } from '../helpers/fileOperationsHelper/fileOperationsHelper';
+import { cdRegexp, upRegexp, lsRegexp, catRegexp, addRegexp, rnRegexp, cpRegexp, rmRegexp } from '../constants';
 
 const commandResolver = (command) => {
     switch(true) {
@@ -24,6 +24,9 @@ const commandResolver = (command) => {
             break;
         case cpRegexp.test(command):
             cpHelper(command);
+            break;
+        case rmRegexp.test(command):
+            rmHelper(command);
             break;
         default:
             return console.log('Invalid input');

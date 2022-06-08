@@ -1,4 +1,4 @@
-import { createReadStream, createWriteStream, stat, rename, access, constants, copyFile } from 'fs';
+import { createReadStream, createWriteStream, stat, rename, access, constants, copyFile, rm } from 'fs';
 import { getCurrendDirMsg, getPathToFile } from '../../utils/commonUtils';
 import { cwd, stdout } from 'process';
 import { EOL } from 'os';
@@ -148,4 +148,28 @@ const cpHelper = (command) => {
     }
 }
 
-export { catHelper, addHelper, rnHelper, cpHelper };
+const rmHelper = (command) => {
+    const commandArr = command.split(' ');
+
+    if(commandArr.length !== 2) {
+        return stdout.write(`Operation failed ${EOL}`);
+    }
+  
+    access(commandArr[1], constants.F_OK, (err) => {
+        if (err) {
+            stdout.write(`Operation failed ${EOL}`)
+            stdout.write(getCurrendDirMsg(cwd()));
+        } else {
+            rm(commandArr[1], (err) => {
+                if(err) {
+                    stdout.write(`Operation failed ${EOL}`)
+                    stdout.write(getCurrendDirMsg(cwd()));
+                }
+                stdout.write(`Removed file => ${commandArr[1]} ${EOL}`)
+                stdout.write(getCurrendDirMsg(cwd()));
+            })
+        }
+    })
+};
+
+export { catHelper, addHelper, rnHelper, cpHelper, rmHelper };
