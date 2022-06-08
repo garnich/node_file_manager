@@ -6,6 +6,7 @@ const catRegexp = /^cat\s{1}/;
 const addRegexp = /^add\s{1}/;
 const rnRegexp = /^rn\s{1}/;
 const cpRegexp = /^cp\s{1}/;
+const mvRegexp = /^mv\s{1}/;
 const rmRegexp = /^rm\s{1}/;
 
 export { 
@@ -15,6 +16,7 @@ export {
     catRegexp, 
     addRegexp, 
     rnRegexp, 
-    cpRegexp, 
+    cpRegexp,
+    mvRegexp, 
     rmRegexp 
 };
