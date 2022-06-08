@@ -9,6 +9,9 @@ const cpRegexp = /^cp\s{1}/;
 const mvRegexp = /^mv\s{1}/;
 const rmRegexp = /^rm\s{1}/;
 
+const osRegexp = /^os\s{1}/;
+
+
 export { 
     cdRegexp, 
     upRegexp, 
@@ -18,5 +21,6 @@ export {
     rnRegexp, 
     cpRegexp,
     mvRegexp, 
-    rmRegexp 
+    rmRegexp ,
+    osRegexp
 };
