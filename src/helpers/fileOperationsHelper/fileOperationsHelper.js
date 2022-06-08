@@ -1,7 +1,8 @@
-import { createReadStream, stat } from 'fs';
+import { createReadStream, createWriteStream, stat } from 'fs';
 import { getCurrendDirMsg } from '../../utils/commonUtils';
 import { cwd, stdout } from 'process';
 import { EOL } from 'os';
+import promiseHelper from '../../utils/promisHelper';
 
 const catHelper = (command) => {
     const commandArr = command.split(' ');
@@ -32,4 +33,28 @@ const catHelper = (command) => {
     })
 };
 
-export { catHelper };
+const addHelper = (command) => {      
+    const commandArr = command.split(' ');
+
+    if(commandArr.length > 2) {
+        return stdout.write(`Operation failed ${EOL}`);
+    }
+
+    stat(commandArr[1], (err, stat) => {
+        if(stat) {
+            stdout.write(`Operation failed ${EOL}`)
+        } else {
+
+            const createNewFile = createWriteStream(commandArr[1]);
+      
+            promiseHelper(createNewFile).then(() => {
+                stdout.write(`Created ${commandArr[1]}${EOL}`);
+                stdout.write(getCurrendDirMsg(cwd()));
+            });
+            
+            createNewFile.end();
+        }
+    })
+};
+
+export { catHelper, addHelper };
