@@ -1,4 +1,4 @@
-import { EOL, cpus} from 'os';
+import { EOL, cpus, homedir } from 'os';
 import { cwd, stdout } from 'process';
 import { getCurrendDirMsg, getCpuInfo } from '../../utils/commonUtils';
 
@@ -18,6 +18,10 @@ const osHelper = (command) => {
                 break;
             case '--CPUS':
                 getCpuInfo(cpus());
+                stdout.write(getCurrendDirMsg(cwd()));
+                break;
+            case '--HOMEDIR':
+                stdout.write(`${JSON.stringify(homedir())}${EOL}`)
                 stdout.write(getCurrendDirMsg(cwd()));
                 break;
             default:
