@@ -1,4 +1,4 @@
-import { EOL, cpus, homedir, userInfo } from 'os';
+import { EOL, cpus, homedir, userInfo, arch } from 'os';
 import { cwd, stdout } from 'process';
 import { getCurrendDirMsg, getCpuInfo } from '../../utils/commonUtils';
 
@@ -21,13 +21,17 @@ const osHelper = (command) => {
                 stdout.write(getCurrendDirMsg(cwd()));
                 break;
             case '--HOMEDIR':
-                stdout.write(`${JSON.stringify(homedir())}${EOL}`)
+                stdout.write(`HOMEDIR => ${JSON.stringify(homedir())}${EOL}`)
                 stdout.write(getCurrendDirMsg(cwd()));
                 break;
             case '--USERNAME':
-                stdout.write(`${JSON.stringify(userInfo().username)}${EOL}`)
+                stdout.write(`USERNAME => ${JSON.stringify(userInfo().username)}${EOL}`)
                 stdout.write(getCurrendDirMsg(cwd()));
-                break;
+                break;architecture
+            case '--ARCHITECTURE':
+                stdout.write(`ARCHITECTURE => ${JSON.stringify(arch())}${EOL}`)
+                stdout.write(getCurrendDirMsg(cwd()));
+            break;
             default:
                 console.log('Invalid input');
         }
