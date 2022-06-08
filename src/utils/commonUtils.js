@@ -1,4 +1,4 @@
-import { homedir } from 'os';
+import { homedir, EOL } from 'os';
 
 const getUserName = (args) => {
     const userName = args.slice(2).reduce(
@@ -19,4 +19,8 @@ const getHomeDir = () => {
     return homedir();
 }
 
-export { getUserName, getHomeDir };
+const getCurrendDirMsg = (dir) => {
+    return `You are currently in => ${dir} ${EOL}`
+}
+
+export { getUserName, getHomeDir, getCurrendDirMsg };
