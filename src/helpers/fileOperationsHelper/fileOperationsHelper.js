@@ -1,4 +1,4 @@
-import { createReadStream, createWriteStream, stat, rename, access, constants } from 'fs';
+import { createReadStream, createWriteStream, stat, rename, access, constants, copyFile } from 'fs';
 import { getCurrendDirMsg, getPathToFile } from '../../utils/commonUtils';
 import { cwd, stdout } from 'process';
 import { EOL } from 'os';
@@ -73,13 +73,11 @@ const rnHelper = (command) => {
             if (err) {
                 stdout.write(`Operation failed ${EOL}`)
                 stdout.write(getCurrendDirMsg(cwd()));
-                return;
             } else {
                 access(join(destination, commandArr[2]), constants.F_OK, (err) => {
                     if (!err) {
                         stdout.write(`Operation failed ${EOL}`)
                         stdout.write(getCurrendDirMsg(cwd()));
-                        return;
                     } else {
                         rename(
                             commandArr[1],
@@ -104,4 +102,50 @@ const rnHelper = (command) => {
     }
 };
 
-export { catHelper, addHelper, rnHelper };
+const cpHelper = (command) => {
+    const commandArr = command.split(' ');
+
+    if(commandArr.length !== 3) {
+        return stdout.write(`Operation failed ${EOL}`);
+    }
+    const destination = getPathToFile(commandArr[1]);
+    const fileName = commandArr[1].split('/').pop();
+
+    if(destination) {
+
+        access(commandArr[1], constants.F_OK, (err) => {
+            if (err) {
+                stdout.write(`Operation failed ${EOL}`)
+                stdout.write(getCurrendDirMsg(cwd()));
+            } else {
+
+                access(join(commandArr[2], fileName), constants.F_OK, (err) => {
+                    if (!err) {
+                        stdout.write(`Operation failed ${EOL}`)
+                        stdout.write(getCurrendDirMsg(cwd()));
+                    } else {
+
+                        copyFile(
+                            commandArr[1],
+                            join(commandArr[2], fileName),
+                            (err) => {
+                                if(err) {
+                                    stdout.write(`Operation failed ${EOL}`)
+                                    stdout.write(getCurrendDirMsg(cwd()));
+                                }
+                                
+                                stdout.write(`Renamed:  ${commandArr[1]} => ${destination}/${commandArr[2]}${EOL}`);
+                                stdout.write(getCurrendDirMsg(cwd()));
+                            }
+                            )
+                        }
+                    })
+                }
+            })
+    } else {
+        stdout.write(`Operation failed ${EOL}`)
+        stdout.write(getCurrendDirMsg(cwd()));
+    }
+}
+
+export { catHelper, addHelper, rnHelper, cpHelper };
