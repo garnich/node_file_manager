@@ -1,8 +1,9 @@
-import { createReadStream, createWriteStream, stat } from 'fs';
-import { getCurrendDirMsg } from '../../utils/commonUtils';
+import { createReadStream, createWriteStream, stat, rename, access, constants } from 'fs';
+import { getCurrendDirMsg, getPathToFile } from '../../utils/commonUtils';
 import { cwd, stdout } from 'process';
 import { EOL } from 'os';
 import promiseHelper from '../../utils/promisHelper';
+import { join } from 'path';
 
 const catHelper = (command) => {
     const commandArr = command.split(' ');
@@ -57,4 +58,50 @@ const addHelper = (command) => {
     })
 };
 
-export { catHelper, addHelper };
+const rnHelper = (command) => {
+    const commandArr = command.split(' ');
+
+    if(commandArr.length !== 3) {
+        return stdout.write(`Operation failed ${EOL}`);
+    }
+
+    const destination = getPathToFile(commandArr[1]);
+
+    if(destination) {
+
+        access(commandArr[1], constants.F_OK, (err) => {
+            if (err) {
+                stdout.write(`Operation failed ${EOL}`)
+                stdout.write(getCurrendDirMsg(cwd()));
+                return;
+            } else {
+                access(join(destination, commandArr[2]), constants.F_OK, (err) => {
+                    if (!err) {
+                        stdout.write(`Operation failed ${EOL}`)
+                        stdout.write(getCurrendDirMsg(cwd()));
+                        return;
+                    } else {
+                        rename(
+                            commandArr[1],
+                            `${destination}/${commandArr[2]}`,
+                            (err) => {
+                                if(err) {
+                                    stdout.write(`Operation failed ${EOL}`)
+                                    stdout.write(getCurrendDirMsg(cwd()));
+                                }
+                                
+                                stdout.write(`Renamed:  ${commandArr[1]} => ${destination}/${commandArr[2]}${EOL}`);
+                                stdout.write(getCurrendDirMsg(cwd()));
+                            }
+                            )
+                        }
+                    })
+                }
+            })
+    } else {
+        stdout.write(`Operation failed ${EOL}`)
+        stdout.write(getCurrendDirMsg(cwd()));
+    }
+};
+
+export { catHelper, addHelper, rnHelper };

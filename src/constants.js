@@ -4,6 +4,6 @@ const lsRegexp = /ls/;
 
 const catRegexp = /^cat\s{1}/;
 const addRegexp = /^add\s{1}/;
+const rnRegexp = /^rn\s{1}/;
 
-
-export { cdRegexp, upRegexp, lsRegexp, catRegexp, addRegexp }
+export { cdRegexp, upRegexp, lsRegexp, catRegexp, addRegexp, rnRegexp }

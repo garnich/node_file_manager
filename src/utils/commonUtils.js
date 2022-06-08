@@ -23,4 +23,14 @@ const getCurrendDirMsg = (dir) => {
     return `You are currently in => ${dir} ${EOL}`
 }
 
-export { getUserName, getHomeDir, getCurrendDirMsg };
+const getPathToFile = (str) => {
+    const pathArr = str.split('/');
+    if( pathArr.length > 1){
+        pathArr.length = pathArr.length -1;
+        return pathArr.join('/');
+    }
+
+    return null;
+};
+
+export { getUserName, getHomeDir, getCurrendDirMsg, getPathToFile };
