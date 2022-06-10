@@ -2,12 +2,12 @@ import { createReadStream, createWriteStream, access, constants } from 'fs';
 import { getCurrendDirMsg } from '../../utils/commonUtils';
 import { cwd, stdout } from 'process';
 import { EOL } from 'os';
-import { createBrotliCompress } from 'zlib';
+import { createBrotliCompress, createBrotliDecompress } from 'zlib';
 
 const compressHelper = (command) => {
     const commandArr = command.split(' ');
     const isCommandArrLenghtNotValid = commandArr.length !== 3;
-    const outoutFileExtention = !isCommandArrLenghtNotValid && commandArr[2].split('.').pop();
+    const outoutFileExtention = !isCommandArrLenghtNotValid && commandArr[1].split('.').pop();
 
     if(!isCommandArrLenghtNotValid && outoutFileExtention !== 'br') {
         stdout.write(`Invalid input ${EOL}`);
@@ -43,7 +43,44 @@ const compressHelper = (command) => {
 };
 
 const decompressHelper = (command) => {
-    console.log('command', command);
+    const commandArr = command.split(' ');
+    
+    if(commandArr.length !== 3) {
+        console.log('here');
+        stdout.write(`Invalid input ${EOL}`);
+        stdout.write(getCurrendDirMsg(cwd()));
+    } else {
+
+        access(commandArr[1], constants.F_OK, (err) => {
+            if(err) {
+        console.log('here1');
+
+                stdout.write(`Operation failed ${EOL}`)
+                stdout.write(getCurrendDirMsg(cwd()));
+            } else {
+
+                access(commandArr[2], constants.F_OK, (err) => {
+
+                    if (err && err.code === 'ENOENT') {
+
+                        const readFileStream = createReadStream(commandArr[1]);
+                            readFileStream
+                                .pipe(createBrotliDecompress())
+                                .pipe(createWriteStream(commandArr[2]))
+                                .on('finish', () => {
+                                    stdout.write(`File DECOMPRESSED ${EOL}`)
+                                    stdout.write(getCurrendDirMsg(cwd()));
+                                })
+                    } else {
+        console.log('here3');
+
+                        stdout.write(`Operation failed ${EOL}`)
+                        stdout.write(getCurrendDirMsg(cwd()));
+                    }
+                });
+            }
+        })
+    }
 };
 
 export { compressHelper, decompressHelper };
