@@ -11,6 +11,7 @@ const rmRegexp = /^rm\s{1}/;
 
 const osRegexp = /^os\s{1}/;
 
+const hashRegexp = /^hash\s{1}/;
 
 export { 
     cdRegexp, 
@@ -22,5 +23,6 @@ export {
     cpRegexp,
     mvRegexp, 
     rmRegexp ,
-    osRegexp
+    osRegexp,
+    hashRegexp
 };
