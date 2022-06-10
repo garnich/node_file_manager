@@ -13,10 +13,10 @@ const catHelper = (command) => {
     } else {
 
         stat(commandArr[1], (err, stat) => {
-            if(err) stdout.write(`Operation failed ${EOL}`)
 
-            if(!stat) {
-                stdout.write(`Operation failed ${EOL}`)
+            if(!stat || err) {
+                stdout.write(`Operation failed ${EOL}`);
+                stdout.write(getCurrendDirMsg(cwd()));
             } else {
                 const readShort = createReadStream(commandArr[1]);
         

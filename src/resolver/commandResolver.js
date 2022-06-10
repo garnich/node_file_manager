@@ -1,8 +1,9 @@
 import { lsHelper, upHelper, cdHelper } from '../helpers/navDirHelper/navDirHelper';
 import { catHelper, addHelper, rnHelper, cpHelper, mvHelper, rmHelper } from '../helpers/fileOperationsHelper/fileOperationsHelper';
 import { osHelper } from '../helpers/osHelper/osHelper';
-import { cdRegexp, upRegexp, lsRegexp, catRegexp, addRegexp, rnRegexp, cpRegexp, mvRegexp, rmRegexp, osRegexp, hashRegexp } from '../constants';
+import { cdRegexp, upRegexp, lsRegexp, catRegexp, addRegexp, rnRegexp, cpRegexp, mvRegexp, rmRegexp, osRegexp, hashRegexp, compressRegexp, decompressRegexp } from '../constants';
 import { hashHelper } from '../helpers/hashHelper/hashHelper';
+import { compressHelper, decompressHelper } from '../helpers/compressDecompressHelper/compressDecompressHelper';
 
 const commandResolver = (command) => {
     switch(true) {
@@ -38,6 +39,12 @@ const commandResolver = (command) => {
             break;
         case hashRegexp.test(command):
             hashHelper(command);
+            break;
+        case compressRegexp.test(command):
+            compressHelper(command);
+            break;
+        case decompressRegexp.test(command):
+            decompressHelper(command);
             break;
         default:
         return console.log('Invalid input');
