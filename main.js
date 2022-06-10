@@ -1,7 +1,7 @@
 import * as readline from 'node:readline';
 import { stdin, stdout, cwd, chdir } from 'process';
-import { getUserName, getCurrendDirMsg, getHomeDir } from './utils/commonUtils';
-import commandResolver from './utils/commandResolver';
+import { getUserName, getCurrendDirMsg, getHomeDir } from './src/utils/commonUtils';
+import commandResolver from './src/utils/commandResolver';
 import { EOL } from 'os';
 
 

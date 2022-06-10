@@ -2,10 +2,10 @@
   "name": "node_file_manager",
   "version": "1.0.0",
   "description": "NODE20222Q2 file-manager task",
-  "main": "index.js",
+  "main": "main.js",
   "type": "module",
   "scripts": {
-    "start": "NODE_OPTIONS='--experimental-specifier-resolution=node' node ./src/server"
+    "start": "NODE_OPTIONS='--experimental-specifier-resolution=node' node main"
   },
   "repository": {
     "type": "git",

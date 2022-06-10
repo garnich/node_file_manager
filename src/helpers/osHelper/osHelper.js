@@ -27,7 +27,7 @@ const osHelper = (command) => {
             case '--USERNAME':
                 stdout.write(`USERNAME => ${JSON.stringify(userInfo().username)}${EOL}`)
                 stdout.write(getCurrendDirMsg(cwd()));
-                break;architecture
+                break;
             case '--ARCHITECTURE':
                 stdout.write(`ARCHITECTURE => ${JSON.stringify(arch())}${EOL}`)
                 stdout.write(getCurrendDirMsg(cwd()));
