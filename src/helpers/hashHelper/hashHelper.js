@@ -3,6 +3,7 @@ import { createHash } from 'crypto';
 import { createReadStream, stat } from 'fs';
 import { cwd, stdout } from 'process';
 import { getCurrendDirMsg } from '../../utils/commonUtils';
+import { resolve } from 'path';
 
 const hashHelper = (command) => {
     const commandArr = command.split(' ');
@@ -11,12 +12,12 @@ const hashHelper = (command) => {
         stdout.write(`Operation failed ${EOL}`);
         stdout.write(getCurrendDirMsg(cwd()));
     } else {
-       stat(commandArr[1], (err, stat) => {
+       stat(resolve(commandArr[1]), (err, stat) => {
             if(!stat) {
                 stdout.write(`Operation failed ${EOL}`)
                 stdout.write(getCurrendDirMsg(cwd()));
             } else {
-                const source = createReadStream(commandArr[1]); 
+                const source = createReadStream(resolve(commandArr[1])); 
                 const hash = createHash('sha256');
                 
                 source.on('data', (chunk) => {
@@ -28,7 +29,10 @@ const hashHelper = (command) => {
                 })
 
                 source.on('close', (err) => {
-                    if(err) stdout.write(`Operation failed ${EOL}`)
+                    if(err) {
+                        stdout.write(`Operation failed ${EOL}`);
+                        stdout.write(getCurrendDirMsg(cwd()));
+                    }
 
                     stdout.write(`${EOL}${EOL}`);
                     stdout.write(getCurrendDirMsg(cwd()));
