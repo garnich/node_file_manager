@@ -1,5 +1,5 @@
 import { readdir } from 'fs';
-import { join } from 'path';
+import { resolve } from 'path';
 import { getCurrendDirMsg } from '../../utils/commonUtils';
 import { cwd, chdir, stdout } from 'process';
 import { EOL } from 'os';
@@ -7,19 +7,18 @@ import { EOL } from 'os';
 const lsHelper = () => {
     const dirname = cwd();
     
-    readdir(join(dirname), ((err, files) => {
+    readdir(resolve(dirname), ((err, files) => {
         if(err) throw err
         files.forEach((item) => console.log(item))
 
         stdout.write(EOL);
-
         stdout.write(getCurrendDirMsg(dirname));
     }))
 };
 
 const upHelper = () => {
     try {
-        chdir('../');
+        chdir(resolve('../'));
         stdout.write(getCurrendDirMsg(cwd()));
     } catch (err) {
         stdout.write(`Operation failed (${err}) ${EOL}`);
@@ -31,11 +30,12 @@ const cdHelper = (command) => {
     const commandArr = command.split(' ');
 
     if(commandArr.length > 2) {
-        return stdout.write(`Operation failed ${EOL}`);
+        stdout.write(`Operation failed ${EOL}`);
+        stdout.write(getCurrendDirMsg(cwd()));
     }
 
     try {
-        chdir(commandArr[1]);
+        chdir(resolve(commandArr[1]));
         stdout.write(getCurrendDirMsg(cwd()));
      } catch (err) {
         stdout.write(`Operation failed (${err}) ${EOL}`);
