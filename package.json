@@ -1,0 +1,20 @@
+{
+  "name": "node_file_manager",
+  "version": "1.0.0",
+  "description": "NODE20222Q2 file-manager task",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-modules --experimental-specifier-resolution=node main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garnich/node_file_manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/garnich/node_file_manager/issues"
+  },
+  "homepage": "https://github.com/garnich/node_file_manager#readme"
+}
