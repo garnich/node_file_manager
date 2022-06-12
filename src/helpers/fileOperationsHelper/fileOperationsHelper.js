@@ -200,7 +200,8 @@ const rmHelper = (command) => {
     const commandArr = command.split(' ');
 
     if(commandArr.length !== 2) {
-        return stdout.write(`Operation failed ${EOL}`);
+        stdout.write(`Invalid input ${EOL}`);
+        stdout.write(getCurrendDirMsg(cwd()));
     } else {
         access(resolve(commandArr[1]), constants.F_OK, (err) => {
             if (err) {

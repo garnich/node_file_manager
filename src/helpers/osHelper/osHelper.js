@@ -33,7 +33,8 @@ const osHelper = (command) => {
                 stdout.write(getCurrendDirMsg(cwd()));
             break;
             default:
-                console.log('Invalid input');
+                stdout.write(`Invalid input ${EOL}`);
+                stdout.write(getCurrendDirMsg(cwd()));
         }
     }
 };

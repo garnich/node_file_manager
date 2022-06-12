@@ -4,6 +4,9 @@ import { osHelper } from '../helpers/osHelper/osHelper';
 import { cdRegexp, upRegexp, lsRegexp, catRegexp, addRegexp, rnRegexp, cpRegexp, mvRegexp, rmRegexp, osRegexp, hashRegexp, compressRegexp, decompressRegexp } from '../constants';
 import { hashHelper } from '../helpers/hashHelper/hashHelper';
 import { compressHelper, decompressHelper } from '../helpers/compressDecompressHelper/compressDecompressHelper';
+import { cwd, stdout } from 'process';
+import { EOL } from 'os';
+import { getCurrendDirMsg } from '../utils/commonUtils';
 
 const commandResolver = (command) => {
     switch(true) {
@@ -47,7 +50,8 @@ const commandResolver = (command) => {
             decompressHelper(command);
             break;
         default:
-        return console.log('Invalid input');
+            stdout.write(`Invalid input ${EOL}`);
+            stdout.write(getCurrendDirMsg(cwd()));
     }
 }
 
