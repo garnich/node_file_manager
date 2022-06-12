@@ -10,7 +10,6 @@ const reader = () => {
     const greeting = `Welcome to the File Manager, ${userName}! ${EOL}`;
     const goodBye = `${EOL}Thank you for using File Manager, ${userName}!`;
 
-    
     const rl = readline.createInterface({ input: stdin, output: stdout });
 
     stdout.write(greeting);
