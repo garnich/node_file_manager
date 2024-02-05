@@ -1,3 +1,5 @@
 const STRANGER = 'Stranger';
 
-export { STRANGER };
+const INAVALID_INPUT = 'Invalid input';
+
+export { STRANGER, INAVALID_INPUT };

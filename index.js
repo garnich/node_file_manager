@@ -6,6 +6,7 @@ import {
     getHomeDir,
     getCurrendLocationMsg,
 } from './src/helpers/commonHelpers';
+import { readLineResolver } from './src/resolver';
 
 const fm = () => {
     const userName = getUserName(process.argv);
@@ -29,6 +30,8 @@ const fm = () => {
         }
 
         stdout.write(EOL);
+
+        readLineResolver(input);
     });
 
     readLine.on('SIGINT', () => {
