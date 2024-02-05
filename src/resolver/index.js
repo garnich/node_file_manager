@@ -9,6 +9,7 @@ import {
     cpRegexp,
     rmRegexp,
     mvRegexp,
+    osRegexp,
 } from '../constants/index.js';
 import { getCurrendLocationMsg } from '../helpers/commonHelpers.js';
 import { cwd, stdout } from 'process';
@@ -22,6 +23,7 @@ import {
     rmUtil,
     mvUtil,
 } from '../utils/fileOperationsUtil.js';
+import { osUtil } from '../utils/osUtil.js';
 
 const readLineResolver = (string) => {
     switch (true) {
@@ -51,6 +53,9 @@ const readLineResolver = (string) => {
             break;
         case mvRegexp.test(string):
             mvUtil(string);
+            break;
+        case osRegexp.test(string):
+            osUtil(string);
             break;
         default:
             stdout.write(`${INAVALID_INPUT} ${EOL}`);

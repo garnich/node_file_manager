@@ -12,6 +12,14 @@ const COPIED = 'Copied';
 
 const MOVED = 'File MOVED';
 
+const OS_VALUES = {
+    EOL: 'EOL',
+    CPUS: 'CPUS',
+    HOMEDIR: 'HOMEDIR',
+    USERNAME: 'USERNAME',
+    ARCHITECTURE: 'ARCHITECTURE',
+};
+
 const upRegexp = /up/;
 const cdRegexp = /^cd\s{1}/;
 const lsRegexp = /ls/;
@@ -23,6 +31,8 @@ const cpRegexp = /^cp\s{1}/;
 const rmRegexp = /^rm\s{1}/;
 const mvRegexp = /^mv\s{1}/;
 
+const osRegexp = /^os\s{1}/;
+
 export {
     STRANGER,
     INAVALID_INPUT,
@@ -31,6 +41,7 @@ export {
     RENAMED,
     COPIED,
     MOVED,
+    OS_VALUES,
     upRegexp,
     cdRegexp,
     lsRegexp,
@@ -40,4 +51,5 @@ export {
     cpRegexp,
     rmRegexp,
     mvRegexp,
+    osRegexp,
 };

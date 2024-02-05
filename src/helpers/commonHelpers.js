@@ -1,5 +1,6 @@
 import { homedir, EOL } from 'node:os';
 import { STRANGER } from '../constants/index.js';
+import { stdout } from 'process';
 
 const getUserName = (args) => {
     const userName = args.slice(2).reduce((acc, key) => {
@@ -33,4 +34,22 @@ const getPathToFile = (str) => {
     return null;
 };
 
-export { getUserName, getHomeDir, getCurrendLocationMsg, getPathToFile };
+const getCpuInfo = (cpuArr) => {
+    stdout.write(`AMOUNT OF CPUS: ${cpuArr.length}${EOL}`);
+    stdout.write(`${EOL}`);
+
+    const cpuData = cpuArr.map((cpu) => ({
+        'CPU MODEL': cpu.model,
+        'CPU CLOCK RATE (GHz)': cpu.speed / 1000,
+    }));
+
+    console.table(cpuData);
+};
+
+export {
+    getUserName,
+    getHomeDir,
+    getCurrendLocationMsg,
+    getPathToFile,
+    getCpuInfo,
+};
