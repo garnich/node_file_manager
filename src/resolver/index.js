@@ -10,6 +10,7 @@ import {
     rmRegexp,
     mvRegexp,
     osRegexp,
+    hashRegexp,
 } from '../constants/index.js';
 import { getCurrendLocationMsg } from '../helpers/commonHelpers.js';
 import { cwd, stdout } from 'process';
@@ -24,6 +25,7 @@ import {
     mvUtil,
 } from '../utils/fileOperationsUtil.js';
 import { osUtil } from '../utils/osUtil.js';
+import { hashUtil } from '../utils/hashUtils.js';
 
 const readLineResolver = (string) => {
     switch (true) {
@@ -56,6 +58,9 @@ const readLineResolver = (string) => {
             break;
         case osRegexp.test(string):
             osUtil(string);
+            break;
+        case hashRegexp.test(string):
+            hashUtil(string);
             break;
         default:
             stdout.write(`${INAVALID_INPUT} ${EOL}`);

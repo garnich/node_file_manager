@@ -33,6 +33,8 @@ const mvRegexp = /^mv\s{1}/;
 
 const osRegexp = /^os\s{1}/;
 
+const hashRegexp = /^hash\s{1}/;
+
 export {
     STRANGER,
     INAVALID_INPUT,
@@ -52,4 +54,5 @@ export {
     rmRegexp,
     mvRegexp,
     osRegexp,
+    hashRegexp,
 };
