@@ -1,10 +1,9 @@
 import { resolve } from 'path';
-import { getCurrendLocationMsg } from '../helpers/commonHelpers';
-import { OPERATION_FAILED } from '../constants';
+import { getCurrendLocationMsg } from '../helpers/commonHelpers.js';
+import { OPERATION_FAILED } from '../constants/index.js';
 import { cwd, chdir, stdout } from 'process';
 import { EOL } from 'node:os';
-import { readdir, lstat } from 'node:fs';
-import { log } from 'console';
+import { readdir } from 'node:fs';
 
 const upUtil = () => {
     try {

@@ -5,8 +5,8 @@ import {
     getUserName,
     getHomeDir,
     getCurrendLocationMsg,
-} from './src/helpers/commonHelpers';
-import { readLineResolver } from './src/resolver';
+} from './src/helpers/commonHelpers.js';
+import { readLineResolver } from './src/resolver/index.js';
 
 const fm = () => {
     const userName = getUserName(process.argv);

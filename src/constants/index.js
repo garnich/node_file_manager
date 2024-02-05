@@ -8,6 +8,8 @@ const upRegexp = /up/;
 const cdRegexp = /^cd\s{1}/;
 const lsRegexp = /ls/;
 
+const catRegexp = /^cat\s{1}/;
+
 export {
     STRANGER,
     INAVALID_INPUT,
@@ -15,4 +17,5 @@ export {
     upRegexp,
     cdRegexp,
     lsRegexp,
+    catRegexp
 };

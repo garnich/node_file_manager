@@ -1,5 +1,5 @@
 import { homedir, EOL } from 'node:os';
-import { STRANGER } from '../constants';
+import { STRANGER } from '../constants/index.js';
 
 const getUserName = (args) => {
     const userName = args.slice(2).reduce((acc, key) => {
