@@ -16,7 +16,6 @@ import { EOL } from 'node:os';
 import { createReadStream, writeFile, access, F_OK, rename, rm } from 'node:fs';
 import { pipeline } from 'stream/promises';
 import { createWriteStream } from 'fs';
-import { log } from 'console';
 
 const catUtil = async (command) => {
     const commandArr = command.split(' ');

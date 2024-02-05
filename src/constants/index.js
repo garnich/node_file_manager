@@ -35,6 +35,9 @@ const osRegexp = /^os\s{1}/;
 
 const hashRegexp = /^hash\s{1}/;
 
+const compressRegexp = /^compress\s{1}/;
+const decompressRegexp = /^decompress\s{1}/;
+
 export {
     STRANGER,
     INAVALID_INPUT,
@@ -55,4 +58,6 @@ export {
     mvRegexp,
     osRegexp,
     hashRegexp,
+    compressRegexp,
+    decompressRegexp
 };
